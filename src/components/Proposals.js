@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Stack,
   HStack,
@@ -19,17 +19,21 @@ export default function SimpleCookiePreference({ arraye }) {
         </Text>
       </Box>
       <HStack spacing={4}>
-        {arraye.map((item) => (
-          <Tag
-            size={"md"}
-            key={item}
-            borderRadius="full"
-            variant="solid"
-            colorScheme="green"
-          >
-            <TagLabel>{item}</TagLabel>
-          </Tag>
-        ))}
+        {false ? (
+          <Text textColor={"gra.300"}>Empty</Text>
+        ) : (
+          arraye.map((item) => (
+            <Tag
+              size={"md"}
+              key={item}
+              borderRadius="full"
+              variant="solid"
+              colorScheme="green"
+            >
+              <TagLabel>{item}</TagLabel>
+            </Tag>
+          ))
+        )}
       </HStack>
     </Stack>
   );
