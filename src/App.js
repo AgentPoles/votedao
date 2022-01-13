@@ -27,7 +27,7 @@ function App() {
   const [proposas, setProposas] = useState([]);
 
   //contract info
-  const contractAddress = "0x5C37db65DB43deFa64542ab270B3f24F3fFFAc58";
+  const contractAddress = "0x2f101EaCa561b61d5e2C202Eb56f9fA7A91F8082";
   const contractABI = abi.abi;
 
   //functions
@@ -444,7 +444,7 @@ function App() {
 
   const refreshDao = async () => {
     showResultMessage(
-      "Refreshing Dao causes other contents to be hypothetically lost",
+      "Refreshing Dao causes records to be hypothetically lost",
       "warning"
     );
 

@@ -132,7 +132,7 @@ function refresh() public {
     totalNumberOfProposals = 0;
     totalNumberOfMembers = 0;
      totalNumberOfVotes = 0;
-    for(uint i = 1; i<Members.length; i++){
+    for(uint i = 0; i<Members.length; i++){
         isMember[Members[i]] = false;
         hasVoted[Members[i]] = false;
 }
@@ -148,6 +148,7 @@ function refresh() public {
  }
 delete Members;
 delete ListOfProposals;
+delete proposals;
 
 emit daoRefreshed(true);
 }
