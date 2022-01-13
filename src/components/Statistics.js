@@ -12,7 +12,7 @@ import { Text } from "@chakra-ui/react";
 // import { ReactNode } from "react";
 import { BsPerson } from "react-icons/bs";
 import { FiServer } from "react-icons/fi";
-import { BsFillHandThumbsUpFill } from "react-icons/bs";
+import { BsPlusSquareDotted } from "react-icons/bs";
 
 function StatsCard(props) {
   const { title, stat, icon } = props;
@@ -94,7 +94,7 @@ export default function BasicStatistics(props) {
         <StatsCard
           title={"vote count"}
           stat={votes}
-          icon={<BsFillHandThumbsUpFill size={"2em"} />}
+          icon={<BsPlusSquareDotted size={"2em"} />}
         />
       </SimpleGrid>
     </Box>

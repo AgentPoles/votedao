@@ -41,10 +41,19 @@ function App() {
 
   const showMessageDefault = () => {
     toast({
-      title: "No Wallet detected",
-      variant: "subtle",
-      description: "Please install a MetaMask wallet to use the Dao.",
-      isClosable: true,
+      position: "bottom",
+      render: () => (
+        <Box color="white" p={3} bg="pink.500">
+          <Flex direction={"row"}>
+            <Spinner mr={2} />
+            <Text ml={2}>
+              {
+                "No Wallet detected, Please install a MetaMask wallet to use the Dao."
+              }
+            </Text>
+          </Flex>
+        </Box>
+      ),
     });
   };
 
