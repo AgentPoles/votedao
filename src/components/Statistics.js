@@ -12,7 +12,7 @@ import { Text } from "@chakra-ui/react";
 // import { ReactNode } from "react";
 import { BsPerson } from "react-icons/bs";
 import { FiServer } from "react-icons/fi";
-import { GoLocation } from "react-icons/go";
+import { BsFillHandThumbsUpFill } from "react-icons/bs";
 
 function StatsCard(props) {
   const { title, stat, icon } = props;
@@ -55,12 +55,31 @@ function StatsCard(props) {
 }
 
 export default function BasicStatistics(props) {
-  const { member, proposals, votes, current_status } = props;
+  const { member, proposals, votes, currentState } = props;
   return (
     <Box maxW="7xl" mx={"auto"} pt={5} px={{ base: 2, sm: 12, md: 17 }}>
-      <Text textAlign={"center"} fontSize={"20px"} py={10} fontWeight={"bold"}>
-        Current Status: {current_status}
-      </Text>
+      <Flex direction={"row"} align={"center"} justifyContent={"center"}>
+        {" "}
+        <Text
+          textAlign={"center"}
+          fontSize={{ base: "18px", sm: "18", md: "19px", lg: "20px" }}
+          py={10}
+          pr={1}
+          fontWeight={"bold"}
+          textColor={"pink.500"}
+        >
+          Current Status:
+        </Text>
+        <Text
+          textAlign={"center"}
+          fontSize={{ base: "16px", sm: "16", md: "18px", lg: "19px" }}
+          py={10}
+          pl={1}
+          fontWeight={"bold"}
+        >
+          {currentState}
+        </Text>
+      </Flex>
       <SimpleGrid columns={{ base: 3, md: 3 }} spacing={{ base: 3, lg: 5 }}>
         <StatsCard
           title={"members"}
@@ -75,7 +94,7 @@ export default function BasicStatistics(props) {
         <StatsCard
           title={"vote count"}
           stat={votes}
-          icon={<GoLocation size={"2em"} />}
+          icon={<BsFillHandThumbsUpFill size={"2em"} />}
         />
       </SimpleGrid>
     </Box>

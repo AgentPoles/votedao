@@ -14,7 +14,13 @@ import {
 } from "@chakra-ui/react";
 import { ChevronDownIcon, SpinnerIcon } from "@chakra-ui/icons";
 
-const Statebar = () => {
+const Statebar = ({
+  allowVoting,
+  endVoting,
+  refresh,
+  result,
+  allowProposals,
+}) => {
   return (
     <div>
       <Flex direction={"row"} justifyContent={"space-between"}>
@@ -31,10 +37,13 @@ const Statebar = () => {
                   Change Status
                 </MenuButton>
                 <MenuList>
-                  <MenuItem>Allow Voting</MenuItem>
-                  <MenuItem onClick={() => alert("Kagebunshin")}>
-                    End Voting
+                  <MenuItem onClick={() => allowProposals()}>
+                    Receive Proposals
                   </MenuItem>
+                  <MenuItem onClick={() => allowVoting()}>
+                    Allow Voting
+                  </MenuItem>
+                  <MenuItem onClick={() => endVoting()}>End Voting</MenuItem>
                 </MenuList>
               </>
             )}
@@ -42,6 +51,7 @@ const Statebar = () => {
           <Button
             bgGradient='linear(to-r, green.200, pink.500) size="md"'
             fontSize={{ base: "10px", sm: "10", md: "14px", lg: "15px" }}
+            onClick={() => result()}
           >
             Get Result
           </Button>
@@ -54,6 +64,7 @@ const Statebar = () => {
           fontSize={{ base: "10px", sm: "10", md: "14px", lg: "15px" }}
           maxW={"150"}
           m={5}
+          onClick={() => refresh()}
         >
           Refresh Dao
         </Button>

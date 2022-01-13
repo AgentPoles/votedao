@@ -18,11 +18,32 @@ import { AddIcon, CheckIcon } from "@chakra-ui/icons";
 import { Container } from "@chakra-ui/react";
 import Statebar from "./components/Statebar";
 import Footer from "./components/Footer";
+import Result from "./components/Result";
 
-const DaoPage = () => {
+const DaoPage = ({
+  totalNumberOfMembers,
+  totalNumberOfProposals,
+  totalVoteCount,
+  currentState,
+  joinDao,
+  setProposal,
+  vote,
+  submitProposal,
+  allowVoting,
+  endVoting,
+  refresh,
+  result,
+  resultReady,
+  winningProposal,
+  proposals,
+  allowProposals,
+}) => {
+  const handleChange = (e) => {
+    setProposal(e.target.value);
+  };
   return (
     <div>
-      <NavBar></NavBar>
+      <NavBar joinDao={joinDao}></NavBar>
       <Box
         mr={{ base: 1, sm: 1, md: 7, lg: 20 }}
         ml={{ base: 1, sm: 1, md: 7, lg: 20 }}
@@ -32,57 +53,76 @@ const DaoPage = () => {
         borderColor={"#2C7A7B"}
         borderRadius={0}
       >
-        <Statebar></Statebar>
-        <Statistics member={0} proposals={0} votes={0}></Statistics>
+        <Statebar
+          allowVoting={allowVoting}
+          endVoting={endVoting}
+          refresh={refresh}
+          result={result}
+          allowProposals={allowProposals}
+        ></Statebar>
+        <Statistics
+          member={totalNumberOfMembers}
+          proposals={totalNumberOfProposals}
+          votes={totalVoteCount}
+          currentState={currentState}
+        ></Statistics>
         <Stack p={1}>
-          <Proposals arraye={[1, 2, 3, 4]} />
+          <Proposals arraye={proposals} />
         </Stack>
-        <Stack align={"center"}>
-          <Flex
-            p={10}
-            alignContent={"center"}
-            direction={"column"}
-            w={"70%"}
-            justifyContent={"center"}
-          >
-            <Input
-              maxW={"400"}
-              placeholder="Enter Proposal"
-              size="lg"
-              alignSelf={"center"}
-              borderColor={"#2C7A7B"}
-            />
-
+        {resultReady ? (
+          <Result winningProposal={winningProposal}></Result>
+        ) : (
+          <Stack align={"center"}>
             <Flex
-              directon={"row"}
-              spacing="40px"
-              justifyContents={"center"}
-              alignSelf="center"
+              p={10}
+              alignContent={"center"}
+              direction={"column"}
+              w={"70%"}
+              justifyContent={"center"}
             >
-              <Button
-                leftIcon={<AddIcon />}
-                colorScheme="green"
-                variant="solid"
-                maxW={"150"}
-                m={5}
-                fontSize={{ base: "12px", sm: "12", md: "14px", lg: "15px" }}
+              <Input
+                maxW={"400"}
+                placeholder="Enter Proposal"
+                size="lg"
+                alignSelf={"center"}
+                type={"number"}
+                borderColor={"#2C7A7B"}
+                onChange={(e) => handleChange(e)}
+              />
+
+              <Flex
+                directon={"row"}
+                spacing="40px"
+                justifyContents={"center"}
+                alignSelf="center"
               >
-                Add Proposal
-              </Button>
-              <Spacer></Spacer>
-              <Button
-                leftIcon={<CheckIcon />}
-                colorScheme="green"
-                variant="solid"
-                fontSize={{ base: "12px", sm: "12", md: "14px", lg: "15px" }}
-                maxW={"150"}
-                m={5}
-              >
-                Vote Proposal
-              </Button>
+                <Button
+                  leftIcon={<AddIcon />}
+                  colorScheme="green"
+                  variant="solid"
+                  maxW={"150"}
+                  m={5}
+                  fontSize={{ base: "12px", sm: "12", md: "14px", lg: "15px" }}
+                  onClick={() => submitProposal()}
+                >
+                  Add Proposal
+                </Button>
+                <Spacer></Spacer>
+                <Button
+                  leftIcon={<CheckIcon />}
+                  colorScheme="green"
+                  variant="solid"
+                  fontSize={{ base: "12px", sm: "12", md: "14px", lg: "15px" }}
+                  maxW={"150"}
+                  m={5}
+                  onClick={() => vote()}
+                >
+                  Vote Proposal
+                </Button>
+              </Flex>
             </Flex>
-          </Flex>
-        </Stack>
+          </Stack>
+        )}
       </Box>
       <Footer></Footer>
     </div>

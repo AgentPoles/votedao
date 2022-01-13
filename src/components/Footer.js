@@ -7,6 +7,7 @@ import {
   useColorModeValue,
   VisuallyHidden,
   Avatar,
+  Link,
 } from "@chakra-ui/react";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
 import Poles from "../poles.PNG";
@@ -53,13 +54,20 @@ export default function SmallWithSocial() {
       >
         <Text>© {new Date().getFullYear()} Paul Oamen.</Text>
         <Stack direction={"row"} spacing={6}>
-          <SocialButton label={"Twitter"} href={"#"}>
+          <SocialButton label={"Github"} href={"https://github.com/AgentPoles"}>
             <FaGithub />
           </SocialButton>
-          <SocialButton label={"YouTube"} href={"#"}>
+          <SocialButton
+            label={"LinkedIn"}
+            href={"https://www.linkedin.com/in/paule-oamen/"}
+          >
             <FaLinkedin />
           </SocialButton>
-          <Avatar src={Poles} size={"sm"}></Avatar>
+
+          <a href="https://pauloamen.netlify.app/" target={"_blank"}>
+            {" "}
+            <Avatar src={Poles} size={"sm"}></Avatar>
+          </a>
         </Stack>
       </Container>
     </Box>

@@ -8,7 +8,8 @@ contract Dao{
     }
    enum CurrentState {receivingProposal,receivingVotes,resultReady}
    CurrentState public currentState;
-    Proposal [] ListOfProposals;  
+    Proposal[] public ListOfProposals;  
+    uint[] public proposals;
     address [] Members;
     // address contractDeployer;
     mapping(uint=>bool) doesProposalExist;
@@ -19,10 +20,7 @@ contract Dao{
     uint public totalNumberOfMembers;
     uint public totalNumberOfVotes;
 
-    //these dummy contents help us to resetMappings;
-    mapping(uint=>bool) dummyDoesProposalExist;
-    mapping(address=>bool) dummyHasVoted;
-    mapping(address=>bool) dummyIsMember;
+
 
 constructor(){
       currentState = CurrentState.receivingProposal;
@@ -41,6 +39,7 @@ event votingStarted(bool started);
 event votingEnded(bool ended);
 event daoRefreshed(bool refreshed);
 event joined(bool joined);
+event receivingProposal(bool _proposal);
 
 //modifiers
  modifier inState(CurrentState _state){
@@ -57,6 +56,7 @@ event joined(bool joined);
      doesProposalExist[_proposal] = true;
      ListOfProposals.push(proposal);
      totalNumberOfProposals +=1;
+     proposals.push(_proposal);
      emit proposalSubmitted(_proposal);
  }
 
@@ -92,14 +92,22 @@ emit voted(_proposal,msg.sender);
       return proposalId;
  }
 
+  function allowProposals() public {
+     require(currentState!=CurrentState.receivingProposal,"Submission of Proposal is currently allowed");
+     currentState = CurrentState.receivingProposal;
+     emit receivingProposal(true);
+ }
+
  function allowVoting() public {
      require(ListOfProposals.length>1,"no proposal to vote for or only one proposal exists");
+     require(currentState!=CurrentState.receivingVotes,"voting already enabled");
      currentState = CurrentState.receivingVotes;
      emit votingStarted(true);
  }
 
   function endVoting() public {
       require(totalNumberOfVotes>0,"no votes yet");
+      require(currentState!=CurrentState.resultReady,"votes already ended");
      currentState = CurrentState.resultReady;
      emit votingEnded(true);
  }
@@ -118,7 +126,7 @@ function joinDao( ) public inState(CurrentState.receivingProposal){
 }
 
 function refresh() public {
-    require(totalNumberOfMembers>2,"Dao is fresh already");
+    require(totalNumberOfMembers>0,"Dao is fresh already");
     currentState = CurrentState.receivingProposal;
     winningProposal = 0;
     totalNumberOfProposals = 0;
@@ -142,6 +150,11 @@ delete Members;
 delete ListOfProposals;
 
 emit daoRefreshed(true);
+}
+
+function getProposals() public view returns (uint[] memory proposale){
+  proposale = proposals;
+  return proposale;
 }
 
 }

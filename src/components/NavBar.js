@@ -33,7 +33,7 @@ const NavLink = ({ children }) => (
   </Link>
 );
 
-export default function Nav() {
+export default function Nav({ joinDao }) {
   const { colorMode, toggleColorMode } = useColorMode("dark");
 
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -56,6 +56,7 @@ export default function Nav() {
                   size={"sm"}
                   mr={4}
                   leftIcon={<AddIcon />}
+                  onClick={() => joinDao()}
                 >
                   Join Dao
                 </Button>
