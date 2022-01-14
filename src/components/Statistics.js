@@ -68,7 +68,7 @@ export default function BasicStatistics(props) {
           fontWeight={"bold"}
           textColor={"pink.500"}
         >
-          Current Status:
+          Current State:
         </Text>
         <Text
           textAlign={"center"}

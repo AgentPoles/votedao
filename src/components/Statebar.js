@@ -34,7 +34,7 @@ const Statebar = ({
                   fontSize={{ base: "10px", sm: "10", md: "14px", lg: "15px" }}
                   rightIcon={<ChevronDownIcon />}
                 >
-                  Change Status
+                  Change State
                 </MenuButton>
                 <MenuList>
                   <MenuItem onClick={() => allowProposals()}>

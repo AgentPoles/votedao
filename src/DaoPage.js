@@ -82,7 +82,7 @@ const DaoPage = ({
             >
               <Input
                 maxW={"400"}
-                placeholder="Enter Proposal"
+                placeholder="Enter Proposal (number)"
                 size="lg"
                 alignSelf={"center"}
                 type={"number"}

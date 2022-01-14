@@ -296,6 +296,11 @@ function App() {
         showResultMessage(error.error.message, "error");
         console.log(error);
       }
+    } else {
+      showResultMessage(
+        "please enter the proposal you want to vote for",
+        "error"
+      );
     }
   };
 
@@ -331,6 +336,11 @@ function App() {
         showResultMessage(error.error.message, "error");
         console.log(error);
       }
+    } else {
+      showResultMessage(
+        "please enter the proposal you want to submit",
+        "error"
+      );
     }
   };
 
